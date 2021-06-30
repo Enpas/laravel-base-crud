@@ -6,6 +6,13 @@
 
     <h1>Comics</h1>
 
+    @if (session('deleted'))
+      <div class="alert alert-success" role="alert">
+        <strong>{{session('deleted')}}</strong>
+        eliminato correttamente!
+      </div>
+    @endif
+
     <section class="mt-5">
       <table class="table">
         <thead>
@@ -23,8 +30,14 @@
               <th>{{$comic->title}}</th>
               <th>{{$comic->date}}</th>
               <th><a href="{{route('comics.show',$comic)}}" class="btn btn-outline-success">SHOW</a></th>
-              <th><a class="btn btn-outline-dark" href="">EDIT</a></th>
-              <th><a class="btn btn-outline-danger" href="">DELETE</a></th>
+              <th><a class="btn btn-outline-dark" href="{{route('comics.edit',$comic)}}">EDIT</a></th>
+              <th>
+                <form action="{{route('comics.destroy',$comic)}}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button class="btn btn-outline-danger">DELETE</button>
+                </form>
+              </th>
             </tr>
           @endforeach
           

@@ -6,6 +6,14 @@
 
     <div class="mt-5">
       <h1>{{$comic['title']}}</h1>
+      <div class="mt-3 d-flex">
+        <a class="btn btn-outline-dark me-3" href="{{route('comics.edit',$comic)}}">EDIT</a>
+        <form action="{{route('comics.destroy',$comic)}}" method="POST">
+          @csrf
+          @method('DELETE')
+          <button class="btn btn-outline-danger">DELETE</button>
+        </form>
+      </div>
     </div>
 
     <div class="row mt-5">
